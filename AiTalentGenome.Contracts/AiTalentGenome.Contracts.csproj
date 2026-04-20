@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>AiTalentGenome.Contracts</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Zhanserik Saydanuly Suleymenov</Authors>
+        <Company>AiTalentGenome</Company>
+        <Description>gRPC контракты для экосистемы AiTalentGenome</Description>
+        <RepositoryUrl>https://github.com/ваше-имя/AiTalentGenome.Contracts</RepositoryUrl>
+
+        <IncludeBuildOutput>true</IncludeBuildOutput>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.Net.Client" Version="2.62.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.26.1" />
+        <PackageReference Include="Grpc.Tools" Version="2.62.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\*.proto" GrpcServices="Both" />
+    </ItemGroup>
+
+</Project>

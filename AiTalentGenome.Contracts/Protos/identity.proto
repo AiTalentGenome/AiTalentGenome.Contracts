@@ -1,0 +1,62 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "AiTalentGenome.Contracts.Identity";
+
+package identity;
+
+service IdentityService {
+  // Обмен кода HH на токен и регистрация/логин
+  rpc ExchangeHhCode (ExchangeHhCodeRequest) returns (AuthResponse);
+
+  // Получение информации о текущем пользователе
+  rpc GetUserInfo (GetUserInfoRequest) returns (UserResponse);
+
+  // Валидация сессии (понадобится для Gateway)
+  rpc ValidateSession (ValidateSessionRequest) returns (ValidateSessionResponse);
+
+  // Выход из системы
+  rpc Logout (LogoutRequest) returns (LogoutResponse);
+}
+
+// Сообщения
+message ExchangeHhCodeRequest {
+  string code = 1;
+}
+
+message GetUserInfoRequest {
+  string access_token = 1;
+}
+
+message AuthResponse {
+  string access_token = 1;
+  bool is_active = 2;
+  string error_message = 3;
+  UserResponse user = 4;
+}
+
+message UserResponse {
+  string id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string company_name = 5;
+  bool is_active = 6;
+  string position = 7;
+}
+
+message ValidateSessionRequest {
+  string access_token = 1;
+}
+
+message ValidateSessionResponse {
+  bool is_valid = 1;
+  string user_id = 2;
+}
+
+message LogoutRequest {
+  string access_token = 1;
+}
+
+message LogoutResponse {
+  bool success = 1;
+}
