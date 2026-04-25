@@ -1,0 +1,63 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "AiTalentGenome.Contracts.Vacancies";
+
+package vacancy;
+
+import "google/protobuf/timestamp.proto";
+
+service VacancyService {
+  // Синхронизация вакансий с HH для конкретного пользователя
+  rpc SyncVacanciesWithHh (SyncVacanciesRequest) returns (SyncVacanciesResponse);
+
+  // Получение списка вакансий из нашей БД
+  rpc GetVacancies (GetVacanciesRequest) returns (GetVacanciesResponse);
+
+  // Получение детальной информации (нужно для AI промпта)
+  rpc GetVacancyById (GetVacancyByIdRequest) returns (VacancyResponse);
+}
+
+message SyncVacanciesRequest {
+  string access_token = 1;
+}
+
+message SyncVacanciesResponse {
+  int32 synced_count = 1;
+  string message = 2;
+}
+
+message GetVacanciesRequest {
+  bool only_active = 1;
+}
+
+message GetVacanciesResponse {
+  repeated VacancyShort vacancies = 1;
+}
+
+message VacancyShort {
+  string id = 1;
+  string hh_id = 2;
+  string title = 3;
+  string employer_name = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message GetVacancyByIdRequest {
+  string id = 1;
+}
+
+message VacancyResponse {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  repeated string key_skills = 4;
+  Salary salary = 5;
+  string experience = 6;
+  string area_name = 7;
+}
+
+message Salary {
+  int32 from = 1;
+  int32 to = 2;
+  string currency = 3;
+}
