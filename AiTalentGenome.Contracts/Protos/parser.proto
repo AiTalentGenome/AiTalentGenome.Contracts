@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "AiTalentGenome.Contracts.Parser";
+
+package parser;
+
+service SmartParser {
+  rpc ParseVacancyDocument (FileRequest) returns (VacancyResult);
+  rpc ParseResumeDocument (FileRequest) returns (CandidateResult);
+}
+
+message FileRequest {
+  bytes file_content = 1;
+  string file_extension = 2; // .pdf, .docx
+}
+
+message VacancyResult {
+  string title = 1;
+  string description = 2;
+  repeated string key_skills = 3;
+  optional int32 salary_from = 4;
+  optional int32 salary_to = 5;
+  string salary_currency = 6;
+  string experience = 7;
+  string area_name = 8;
+}
+
+message CandidateResult {
+  string candidate_name = 1;
+  string candidate_email = 2;
+  string candidate_phone = 3;
+  string ai_summary = 4;
+}
