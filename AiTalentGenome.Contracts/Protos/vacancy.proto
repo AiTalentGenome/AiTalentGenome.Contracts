@@ -16,6 +16,17 @@ service VacancyService {
   // Получение детальной информации (нужно для AI промпта)
   rpc GetVacancyById (GetVacancyByIdRequest) returns (VacancyResponse);
   rpc AddManualApplication (AddManualApplicationRequest) returns (AddManualApplicationResponse);
+  rpc SyncApplications (SyncApplicationsRequest) returns (SyncApplicationsResponse);
+}
+
+message SyncApplicationsRequest {
+  string vacancy_id = 1;      // Наш внутренний Guid вакансии
+  string access_token = 2;    // HH токен
+}
+
+message SyncApplicationsResponse {
+  int32 synced_count = 1;
+  string message = 2;
 }
 
 message AddManualApplicationRequest {
