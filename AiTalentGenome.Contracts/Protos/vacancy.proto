@@ -15,7 +15,7 @@ service VacancyService {
 
   // Получение детальной информации (нужно для AI промпта)
   rpc GetVacancyById (GetVacancyByIdRequest) returns (VacancyResponse);
-  rpc AddManualApplication (AddManualApplicationRequest) returns (AddManualApplicationResponse);
+  rpc AddManualCandidate (AddManualCandidateRequest) returns (ApplicationResponse);
   rpc SyncApplications (SyncApplicationsRequest) returns (SyncApplicationsResponse);
 }
 
@@ -29,7 +29,7 @@ message SyncApplicationsResponse {
   string message = 2;
 }
 
-message AddManualApplicationRequest {
+message AddManualCandidateRequest {
   string vacancy_id = 1;
   string candidate_name = 2;
   string candidate_email = 3;
@@ -38,9 +38,10 @@ message AddManualApplicationRequest {
   string cover_letter = 6;
 }
 
-message AddManualApplicationResponse {
+message ApplicationResponse {
   string id = 1;
-  bool success = 2;
+  string status = 2;
+  string message = 3;
 }
 
 message SyncVacanciesRequest {
