@@ -4,30 +4,31 @@ option csharp_namespace = "AiTalentGenome.Contracts.Parser";
 
 package parser;
 
-service SmartParser {
-  rpc ParseVacancyDocument (FileRequest) returns (VacancyResult);
-  rpc ParseResumeDocument (FileRequest) returns (CandidateResult);
+service DocumentParser {
+  rpc ParseVacancy (ParseRequest) returns (VacancyResponse);
+  rpc ParseResume (ParseRequest) returns (CandidateResponse);
 }
 
-message FileRequest {
+message ParseRequest {
   bytes file_content = 1;
-  string file_extension = 2; // .pdf, .docx
+  string file_extension = 2;
 }
 
-message VacancyResult {
+// Структура для вакансии (JD)
+message VacancyResponse {
   string title = 1;
   string description = 2;
   repeated string key_skills = 3;
-  optional int32 salary_from = 4;
-  optional int32 salary_to = 5;
-  string salary_currency = 6;
-  string experience = 7;
-  string area_name = 8;
+  string experience = 4;
+  string area_name = 5;
+  optional int32 salary_from = 6;
+  optional int32 salary_to = 7;
 }
 
-message CandidateResult {
+// Структура для резюме кандидата
+message CandidateResponse {
   string candidate_name = 1;
   string candidate_email = 2;
   string candidate_phone = 3;
-  string ai_summary = 4;
+  string cover_letter = 4;
 }
