@@ -17,6 +17,20 @@ service VacancyService {
   rpc GetVacancyById (GetVacancyByIdRequest) returns (VacancyResponse);
   rpc AddManualCandidate (AddManualCandidateRequest) returns (ApplicationResponse);
   rpc SyncApplications (SyncApplicationsRequest) returns (SyncApplicationsResponse);
+
+  rpc CreateVacancyFromFile (UploadFileRequest) returns (VacancyResponse);
+  rpc AddCandidateFromFile (UploadCandidateFileRequest) returns (ApplicationResponse);
+}
+
+message UploadFileRequest {
+  bytes file_content = 1;
+  string extension = 2;
+}
+
+message UploadCandidateFileRequest {
+  string vacancy_id = 1;
+  bytes file_content = 2;
+  string extension = 3;
 }
 
 message SyncApplicationsRequest {
