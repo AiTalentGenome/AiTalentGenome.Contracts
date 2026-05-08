@@ -12,6 +12,10 @@ service DocumentParser {
 message ParseRequest {
   bytes file_content = 1;
   string file_extension = 2;
+
+  string vacancy_title = 3;
+  string vacancy_description = 4;
+  repeated string vacancy_key_skills = 5;
 }
 
 // Структура для вакансии (JD)
@@ -31,4 +35,15 @@ message CandidateResponse {
   string candidate_email = 2;
   string candidate_phone = 3;
   string cover_letter = 4;
+
+  string raw_resume_text = 5;
+  repeated string candidate_skills = 6;
+  int32 total_experience_months = 7;
+  string last_job_title = 8;
+  string last_company = 9;
+  string education = 10;
+
+  double ai_score = 11;
+  string ai_analysis_json = 12; // JSON: { "pros": [], "cons": [], "culture_fit": 0.0 }
+  repeated string critical_mismatches = 13;
 }
