@@ -25,6 +25,7 @@ service VacancyService {
 message UploadFileRequest {
   bytes file_content = 1;
   string extension = 2;
+  string access_token = 3;
 }
 
 message UploadCandidateFileRequest {
