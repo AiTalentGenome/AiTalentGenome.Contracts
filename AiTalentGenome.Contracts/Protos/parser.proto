@@ -6,13 +6,18 @@ package parser;
 
 service DocumentParser {
   rpc ParseVacancy (ParseRequest) returns (VacancyResponse);
-  rpc ParseResume (ParseRequest) returns (CandidateResponse);
+  rpc ParseResume (ParseResumeRequest) returns (CandidateResponse);
 }
 
 message ParseRequest {
   bytes file_content = 1;
   string file_extension = 2;
+}
 
+message ParseResumeRequest {
+  bytes file_content = 1;
+  string file_extension = 2;
+  // Контекст вакансии для AI анализа
   string vacancy_title = 3;
   string vacancy_description = 4;
   repeated string vacancy_key_skills = 5;
@@ -29,21 +34,18 @@ message VacancyResponse {
   optional int32 salary_to = 7;
 }
 
-// Структура для резюме кандидата
 message CandidateResponse {
   string candidate_name = 1;
   string candidate_email = 2;
   string candidate_phone = 3;
   string cover_letter = 4;
-
-  string raw_resume_text = 5;
-  repeated string candidate_skills = 6;
-  int32 total_experience_months = 7;
-  string last_job_title = 8;
-  string last_company = 9;
-  string education = 10;
-
-  double ai_score = 11;
-  string ai_analysis_json = 12; // JSON: { "pros": [], "cons": [], "culture_fit": 0.0 }
-  repeated string critical_mismatches = 13;
+  repeated string candidate_skills = 5;
+  int32 total_experience_months = 6;
+  string last_job_title = 7;
+  string last_company = 8;
+  string education = 9;
+  double ai_score = 10;
+  string ai_analysis_json = 11;
+  repeated string critical_mismatches = 12;
+  string raw_resume_text = 13;
 }
