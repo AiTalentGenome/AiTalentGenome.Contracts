@@ -20,6 +20,8 @@ service VacancyService {
 
   rpc CreateVacancyFromFile (UploadFileRequest) returns (VacancyResponse);
   rpc AddCandidateFromFile (UploadCandidateFileRequest) returns (ApplicationResponse);
+
+  rpc GetApplicationsByVacancy (GetApplicationsRequest) returns (GetApplicationsResponse);
 }
 
 message UploadFileRequest {
@@ -102,4 +104,24 @@ message Salary {
   int32 from = 1;
   int32 to = 2;
   string currency = 3;
+}
+
+message GetApplicationsRequest {
+  string vacancy_id = 1;
+}
+
+message GetApplicationsResponse {
+  repeated ApplicationDetail applications = 1;
+}
+
+message ApplicationDetail {
+  string id = 1;
+  string candidate_name = 2;
+  string candidate_email = 3;
+  string last_job_title = 4;
+  int32 total_experience_months = 5;
+  double ai_score = 6;
+  string status = 7;
+  repeated string candidate_skills = 8;
+  string applied_at = 9; // Можно использовать google.protobuf.Timestamp
 }
