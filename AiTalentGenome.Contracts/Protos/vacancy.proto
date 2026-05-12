@@ -84,6 +84,8 @@ message VacancyShort {
   string title = 3;
   string employer_name = 4;
   google.protobuf.Timestamp created_at = 5;
+  string area_name = 6;
+  bool is_active = 7;  
 }
 
 message GetVacancyByIdRequest {
