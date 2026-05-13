@@ -24,6 +24,17 @@ service VacancyService {
   rpc GetApplicationsByVacancy (GetApplicationsRequest) returns (GetApplicationsResponse);
 }
 
+enum ApplicationStatus {
+  SUBMITTED = 0;       // Неразобранные (inbox)
+  CONSIDER = 1;        // Подумать (consider)
+  PHONE_INTERVIEW = 2; // Первичный контакт
+  ASSESSMENT = 3;      // Тестовое задание
+  INTERVIEW = 4;       // Собеседование
+  OFFER = 5;           // Предложение о работе
+  HIRED = 6;           // Выход на работу
+  REJECTED = 7;        // Не подходит (discard)
+}
+
 message UploadFileRequest {
   bytes file_content = 1;
   string extension = 2;
@@ -111,6 +122,8 @@ message Salary {
 
 message GetApplicationsRequest {
   string vacancy_id = 1;
+  repeated ApplicationStatus statuses = 2; // Список выбранных чекбоксов
+  bool only_analyzed = 3;
 }
 
 message GetApplicationsResponse {
@@ -126,5 +139,5 @@ message ApplicationDetail {
   double ai_score = 6;
   string status = 7;
   repeated string candidate_skills = 8;
-  string applied_at = 9; // Можно использовать google.protobuf.Timestamp
+  google.protobuf.Timestamp applied_at = 9; // Можно использовать google.protobuf.Timestamp
 }
