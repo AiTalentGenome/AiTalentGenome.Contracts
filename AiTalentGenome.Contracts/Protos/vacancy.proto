@@ -68,7 +68,7 @@ message AddManualCandidateRequest {
 
 message ApplicationResponse {
   string id = 1;
-  string status = 2;
+  ApplicationStatus status = 2;
   string message = 3;
 }
 
@@ -137,7 +137,7 @@ message ApplicationDetail {
   string last_job_title = 4;
   int32 total_experience_months = 5;
   double ai_score = 6;
-  string status = 7;
+  ApplicationStatus status = 7;
   repeated string candidate_skills = 8;
   google.protobuf.Timestamp applied_at = 9; // Можно использовать google.protobuf.Timestamp
 }
