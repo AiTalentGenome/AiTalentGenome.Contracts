@@ -112,6 +112,7 @@ message VacancyResponse {
   Salary salary = 5;
   string experience = 6;
   string area_name = 7;
+  string hh_id = 8;
 }
 
 message Salary {
