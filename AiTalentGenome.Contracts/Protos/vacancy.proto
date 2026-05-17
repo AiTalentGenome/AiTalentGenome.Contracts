@@ -22,6 +22,8 @@ service VacancyService {
   rpc AddCandidateFromFile (UploadCandidateFileRequest) returns (ApplicationResponse);
 
   rpc GetApplicationsByVacancy (GetApplicationsRequest) returns (GetApplicationsResponse);
+
+  rpc GetPagedApplicationsByVacancy (GetPagedApplicationsRequest) returns (GetPagedApplicationsResponse);
 }
 
 enum ApplicationStatus {
@@ -33,6 +35,20 @@ enum ApplicationStatus {
   OFFER = 5;           // Предложение о работе
   HIRED = 6;           // Выход на работу
   REJECTED = 7;        // Не подходит (discard)
+}
+
+message GetPagedApplicationsRequest {
+  string vacancy_id = 1;
+  repeated ApplicationStatus statuses = 2;
+  bool only_analyzed = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+}
+
+// Новый ответ, возвращающий срез данных и метаинформацию
+message GetPagedApplicationsResponse {
+  repeated ApplicationDetail applications = 1;
+  int32 total_count = 2;
 }
 
 message UploadFileRequest {
