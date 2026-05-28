@@ -24,6 +24,18 @@ service VacancyService {
   rpc GetApplicationsByVacancy (GetApplicationsRequest) returns (GetApplicationsResponse);
 
   rpc GetPagedApplicationsByVacancy (GetPagedApplicationsRequest) returns (GetPagedApplicationsResponse);
+
+  rpc StartAiAnalysis (StartAiAnalysisRequest) returns (StartAiAnalysisResponse);
+}
+
+message StartAiAnalysisRequest {
+  string vacancy_id = 1;
+  repeated string application_ids = 2; // Список выбранных HR-ом кандидатов (галочки на фронте)
+  string user_criteria = 3;            // Дополнительные критерии из текстового поля
+}
+
+message StartAiAnalysisResponse {
+  string message = 1;
 }
 
 enum ApplicationStatus {
