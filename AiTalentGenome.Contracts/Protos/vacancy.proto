@@ -35,7 +35,14 @@ message StartAiAnalysisRequest {
 }
 
 message StartAiAnalysisResponse {
-  string message = 1;
+  repeated AnalyzedApplicationResult results = 1; // Возвращаем массив результатов
+}
+
+message AnalyzedApplicationResult {
+  string application_id = 1;
+  double ai_score = 2;
+  string ai_analysis_json = 3;
+  repeated string candidate_skills = 4;
 }
 
 enum ApplicationStatus {
