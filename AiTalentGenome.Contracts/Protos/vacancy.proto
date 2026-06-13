@@ -176,5 +176,6 @@ message ApplicationDetail {
   double ai_score = 6;
   ApplicationStatus status = 7;
   repeated string candidate_skills = 8;
-  google.protobuf.Timestamp applied_at = 9; // Можно использовать google.protobuf.Timestamp
+  google.protobuf.Timestamp applied_at = 9;
+  string ai_analysis_json = 10;
 }
